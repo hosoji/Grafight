@@ -50,11 +50,11 @@ public class AreaNode : MonoBehaviour {
 
 	public void ChangeNodeToNodeBlock(){
 		sr.sprite = sprites [1];
-		cost = 1;
+		cost = 2;
 	}
 
 	public void ChangeNodeBlockToNode(){
 		sr.sprite = sprites [0];
-		cost = 0;
+		cost = 1;
 	}
 }

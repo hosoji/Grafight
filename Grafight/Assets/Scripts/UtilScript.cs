@@ -14,17 +14,17 @@ public class UtilScript : MonoBehaviour {
 
 	}
 
-	public static Vector3 CalculateCentroid (Vector3[] points, float yOffset){
+	public static Vector3 CalculateCentroid (Vector3[] points, float zOffset){
 		
 		float sumX = 0;
-		float sumZ = 0; 
+		float sumY = 0; 
 
 		for (int i = 0; i < points.Length; i++) {
 			sumX += points [i].x;
-			sumZ += points [i].z;
+			sumY += points [i].y;
 		}
 
-		return new Vector3 ((sumX / points.Length), yOffset, (sumZ / points.Length));
+		return new Vector3 ((sumX / points.Length), (sumY / points.Length), 0);
 
 	}
 

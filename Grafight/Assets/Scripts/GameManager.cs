@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour {
 
 	public float zOffset = -7f;
 	public float xOffset = -30f;
+	public float yOffset;
 
 	public float gridSize;
 
@@ -25,9 +27,16 @@ public class GameManager : MonoBehaviour {
 
 	public Transform dotPrefab;
 
+	public Text p1ScoreText;
+	public Text p2ScoreText;
+
+	public static int p1Score;
+	public static int p2Score;
+
 
 
 	void Awake () {
+		/*
 		
 		grid = new GameObject ("Grid");
 
@@ -37,18 +46,21 @@ public class GameManager : MonoBehaviour {
 
 		for (int c = 0; c < columnLength; c++) {
 			for (int r = 0; r < rowLength; r++) {
-				Vector3 pos = new Vector3 (r * gridSize + xOffset,-1f,c * gridSize + zOffset);
-				gridArray[r,c] = Instantiate (dotPrefab, pos, Quaternion.identity, grid.transform) as Transform;
+//				Vector3 pos = new Vector3 (r * gridSize + xOffset,-1f,c * gridSize + zOffset);
+				Vector3 pos = new Vector3 (r * gridSize - 2f,c * gridSize - 2f,0.1f);
+				gridArray[r,c] = Instantiate (dotPrefab, pos, Quaternion.Euler(-90,0,0), grid.transform) as Transform;
+				gridArray [r, c].name = r.ToString () + " " + c.ToString ();
 
+//				if (gridArray [r, c].name == "0 2") {
+//					Destroy(gridArray [r, c].gameObject);
+//				}
 //				gridArray[r,c].transform.localPosition = new Vector3 (90f, 0f, 0f);
 //				gridArray[r,c].transform.localScale = new Vector3 (3.4f, 3.4f, 3.4f);
-//				print (gridArray [r, c]);
+//				print (gridArray [r, c]); 
 			}
-		}
-
+		}*/
 
 	}
-
 
 		
 	public Vector3 GetWorldPosition(int x, int z){
@@ -56,20 +68,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 
+	void Update(){
+		p1ScoreText.text = p1Score.ToString ();
+		p2ScoreText.text = p2Score.ToString ();
 
-//	void AssignDefaultKeyframes(){
-//		for (int i = 0; i < columnLength; i++) {
-//			player1.GetComponent<KeyframeScript> ().AreaNodeAssignment (gridArray[0,i].position);
-//			player1.GetComponent<KeyframeScript> ().keyFrames.Clear ();
-//
-//			player2.GetComponent<KeyframeScript> ().AreaNodeAssignment (gridArray[rowLength-1,i].position);
-//			player2.GetComponent<KeyframeScript> ().keyFrames.Clear ();
-//
-//		}
-//
-//	
-//	}
-
+		p1Score = GameObject.Find ("Anchor1").GetComponentsInChildren<NanoScript> ().Length;
+		p2Score = GameObject.Find ("Anchor2").GetComponentsInChildren<NanoScript> ().Length;
+	}
 
 
 
@@ -90,8 +95,6 @@ public class GameManager : MonoBehaviour {
 
 		return cost;
 	}
-
-
 
 
 	public Vector2 Pos2d(PlayerScript target){
